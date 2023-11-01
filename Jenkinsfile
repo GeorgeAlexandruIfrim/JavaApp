@@ -28,6 +28,16 @@ pipeline {
                 }
             }
         }
+
+        stage('Clean and SonarQube Analysis') {
+            steps {
+                // Use 'bat' to run Windows batch commands
+                bat "\"${tool 'Maven'}/bin/mvn\" clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar"
+            }
+        }
+    
+
+
         stage('Package') {
             steps {
                 dir("${env.WORKSPACE}/Ch05/05_04-challenge-create-artifacts-and-reports"){
