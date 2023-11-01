@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Source') {
             steps {
-                git branch: 'main',
+                git branch: 'master',
                     changelog: false,
                     poll: false,
                     url: 'https://github.com/GeorgeAlexandruIfrim/JavaApp.git'
@@ -30,9 +30,14 @@ pipeline {
         }
 
         stage('Clean and SonarQube Analysis') {
+            // steps {
+            //     // Use 'bat' to run Windows batch commands
+            //     bat "\"${tool 'Maven'}/bin/mvn\" clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar"
+            // }
             steps {
-                // Use 'bat' to run Windows batch commands
-                bat "\"${tool 'Maven'}/bin/mvn\" clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar"
+              withSonarQubeEnv('SonarQube') {
+                sh 'mvn clean package sonar:sonar'
+              }
             }
         }
     
