@@ -69,6 +69,24 @@
           <artifactId>maven-project-info-reports-plugin</artifactId>
           <version>3.0.0</version>
         </plugin>
+
+        <plugin>
+            <groupId>org.sonarsource.scanner.maven</groupId>
+            <artifactId>sonar-maven-plugin</artifactId>
+            <version>3.10.0.2594</version>
+            <executions>
+                <execution>
+                    <phase>verify</phase>
+                    <goals>
+                        <goal>sonar</goal>
+                    </goals>
+                </execution>
+            </executions>
+            <configuration>
+                <sonar.login>squ_33c4bdbd6d5a75cbb80d480350bf951fddb1211d</sonar.login>
+            </configuration>
+        </plugin>
+        
       </plugins>
     </pluginManagement>
   </build>
